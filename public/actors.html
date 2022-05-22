@@ -51,7 +51,7 @@
           <input type="text" id="actor-first-name" placeholder="First/Given Name" />
           <label for="actor-last-name">Last Name</label>
           <input type="text" id="actor-last-name" placeholder="First/Family Name" />
-          <button type="button" class="pure-button pure-button-primary">Add</button>
+          <button type="button" class="pure-button pure-button-primary" onclick="send()">Add</button>
         </fieldset>
       </form>
     </aside>
@@ -82,9 +82,19 @@
         }
       }
     };
-
     xhttp.open("GET", "/actors", true);
     xhttp.send();
+
+
+    function send() {
+        var firstName = document.getElementById("actor-first-name").value;
+        var lastName = document.getElementById("actor-last-name").value;
+        var xhttp = new XMLHttpRequest();
+
+        xhttp.open("POST", "/addactor", true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send(JSON.stringify({ firstName: firstName, lastName: lastName }));
+      }
   </script>
 </body>
 
